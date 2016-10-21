@@ -5,8 +5,11 @@ The original purpose to test puppet for automatic ddeploy Cisco nexus DC switche
 
 Logical diagram as following :
 
+
+
 Node(puppet agent) <----->puppet Server(site.pp / modules)<------->Postgre SQL
-    Gem Utilities                       ^                                ^
+
+     Gem Utilities                       ^                                ^
     
        node report                      |                                |
        
