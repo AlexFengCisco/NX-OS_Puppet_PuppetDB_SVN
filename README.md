@@ -7,15 +7,26 @@ Logical diagram as following :
 
 Node(puppet agent) <----->puppet Server(site.pp / modules)<------->Postgre SQL
     Gem Utilities                       ^                                ^
+    
        node report                      |                                |
+       
             ^                           |                                |
+            
             |                           |                                | 
+            
             |------------------------------------------------------------|
+            
                                         |                                |
-                                        |                                |   
-                                 SVN Server(apach 2)          Web Server/REST API                
+                                        
+                                        |                                | 
+                                        
+                                 SVN Server(apach 2)          Web Server/REST API 
+                                 
                                         |                                |
+                                        
                                         |                                |
+                                        
           Puppet Code Develope<---------|                       Browser/Application
+          
                                                          
                                                          
