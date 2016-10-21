@@ -23,3 +23,7 @@
     
     puppet agent version:
            
+            root@puppetserver:~# puppet -V
+            4.7.0
+
+    
