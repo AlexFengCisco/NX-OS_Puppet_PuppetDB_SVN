@@ -5,15 +5,17 @@ The original purpose to test puppet for automatic ddeploy Cisco nexus DC switche
 
 Logical diagram as following :
 
-Node(puppet agent /Gem utilities) <----->puppet Server(site.pp / modules)<------->Postgre SQL<------>Web server<------>browser
-       node report
-            ^                                            ^                                                ^
-            |                                            |                                                | 
-            |---------------------------------------------------------------------------------------------|
-                                                         |
-                                                         |
-                                                 SVN Server(apach 2)
-                                                         |
-                 Puppet Code Develope< ------------------|
+Node(puppet agent) <----->puppet Server(site.pp / modules)<------->Postgre SQL
+    Gem Utilities                       ^                                ^
+       node report                      |                                |
+            ^                           |                                |
+            |                           |                                | 
+            |------------------------------------------------------------|
+                                        |                                |
+                                        |                                |   
+                                 SVN Server(apach 2)          Web Server/REST API                
+                                        |                                |
+                                        |                                |
+          Puppet Code Develope<---------|                       Browser/Application
                                                          
                                                          
