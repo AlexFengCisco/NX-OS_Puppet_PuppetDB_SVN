@@ -17,7 +17,7 @@ Logical diagram as following :
             |-----------------------------------------------------------|
                                         |                               |
                                         |                               | 
-                             SVN Server(http/SVN)       Apache2 Web Server/REST API 
+                             SVN Server(Apache2/SVN)       Jetty Web Server/REST API 
                                         |                               |
                                         |                               |
                                Code Developer               Web Browser/Application
