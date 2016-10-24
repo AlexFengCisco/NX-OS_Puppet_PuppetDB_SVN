@@ -9,7 +9,7 @@ Logical diagram as following :
                                                                    Postgre SQL
                                                                         |
                                                                         |
-Node(puppet agent) <----->puppet Server(site.pp / modules)<------->Puppet DB
+     Node(puppet agent) <--->puppet Server(site.pp / modules)<--->  Puppet DB
 
      Gem Utilities                       ^                               ^
     
@@ -25,7 +25,7 @@ Node(puppet agent) <----->puppet Server(site.pp / modules)<------->Puppet DB
                                         
                                         |                                | 
                                         
-                                 SVN Server(apach 2)          Web Server/REST API 
+                                 SVN Server(apach 2)          Apache2 Web Server/REST API 
                                  
                                         |                                |
                                         
