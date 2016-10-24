@@ -9,29 +9,18 @@ Logical diagram as following :
                                                                    Postgre SQL
                                                                         |
                                                                         |
-     Node(puppet agent) <--->puppet Server(site.pp / modules)<--->  Puppet DB
-
-     Gem Utilities                       ^                               ^
-    
-       node report                      |                                |
-       
-            ^                           |                                |
-            
-            |                           |                                | 
-            
-            |------------------------------------------------------------|
-            
-                                        |                                |
-                                        
-                                        |                                | 
-                                        
-                                 SVN Server(apach 2)          Apache2 Web Server/REST API 
-                                 
-                                        |                                |
-                                        
-                                        |                                |
-                                        
-          Puppet Code Develope<---------|                       Browser/Application
+     Node(puppet agent) <---->puppet Server(site.pp / modules)<----->Puppet DB
+    Gem Utilities                       ^                               ^
+       node report                      |                               |
+            ^                           |                               |
+            |                           |                               | 
+            |-----------------------------------------------------------|
+                                        |                               |
+                                        |                               | 
+                             SVN Server(http/SVN)       Apache2 Web Server/REST API 
+                                        |                               |
+                                        |                               |
+                               Code Developer               Web Browser/Application
           
                                                          
                                                          
