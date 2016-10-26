@@ -1,0 +1,147 @@
+
+
+### update soon........
+
+yum install http://yum.puppetlabs.com/puppetlabs-release-pc1-cisco-wrlinux-5.noarch.rpm
+ yum install puppt
+
+  export PATH=/opt/puppetlabs/puppet/bin:/opt/puppetlabs/puppet/lib:$PATH
+
+  gem install cisco_node_utils
+
+  gem 'cisco_node_utils', '~> 1.3'
+
+  cisco@puppetserver:~$ puppet cert list
+  "leaf204.cisco.com" (SHA256) F6:72:29:F9:2F:9B:1D:44:38:EC:00:6F:7A:62:48:CB:83:33:BA:81:06:A3:29:15:21:8D:51:FB:D3:28:B9:E8
+
+cisco@puppetserver:~$ puppet cert sign --all
+Signing Certificate Request for:
+  "leaf204.cisco.com" (SHA256) F6:72:29:F9:2F:9B:1D:44:38:EC:00:6F:7A:62:48:CB:83:33:BA:81:06:A3:29:15:21:8D:51:FB:D3:28:B9:E8
+Notice: Signed certificate request for leaf204.cisco.com
+Notice: Removing file Puppet::SSL::CertificateRequest leaf204.cisco.com at '/home/cisco/.puppetlabs/etc/puppet/ssl/ca/requests/leaf204.cisco.com.pem'
+cisco@puppetserver:~$ puppet cert list
+
+export PATH=/opt/puppetlabs/puppet/bin:/opt/puppetlabs/puppet/lib:$PATH
+ip netns exec management bash
+
+gem install --local cisco_node_utils-1.4.0.gem
+
+Exiting; no certificate found and waitforcert is disabled
+To resolve this issue login to the Puppet master server and list all certificates awaiting a signature eg.:
+# puppet cert list
+  "agent1" (SHA256) 73:D4:EF:1A:F6:B9:D8:2F:AB:6F:4F:95:CA:73:CE:3F:8C:8B:5C:23:BB:B2:17:47:98:08:C7:01:96:C1:17:E2
+
+From the above we can see that certificate from a single host agent1 is waiting for its certificate to be signed. Your output may be different and contain multiple certificates awaiting for a signature. From here we have two options on how to sign the above certificate. First, we can sign each certificate individually:
+
+# puppet cert sign agent1
+Notice: Signed certificate request for agent1
+Notice: Removing file Puppet::SSL::CertificateRequest agent1
+at '/etc/puppetlabs/puppet/ssl/ca/requests/agent1.pem'
+
+or we can sign all awaiting certificates at once:
+# puppet cert sign --all
+
+###bash shell
+
+/etc/init.d/puppet modify with
+daemon $daemonopts ip netns exec management $puppetd ${PUPPET_OPTS} ${PUPPET_EXTRA_OPTS}
+
+/etc/puppetlabs/puppet/puppet.conf
+# This file can be used to override the default puppet settings.
+# See the following links for more details on what settings are available:
+# - https://docs.puppetlabs.com/puppet/latest/reference/config_important_settings.html
+# - https://docs.puppetlabs.com/puppet/latest/reference/config_about_settings.html
+# - https://docs.puppetlabs.com/puppet/latest/reference/config_file_main.html
+# - https://docs.puppetlabs.com/puppet/latest/referenc/configuration.html
+[main]
+server   = puppetserver.cisco.com
+certname = leaf204.cisco.com
+
+[agent]
+runinterval = 30
+
+#puppet agent - - configprint all
+
+****solve guest shell yum install slow issue
+timeout=300 # default is 30
+
+minrate=100 # default is 1000
+
+root@leaf204#rm -r /etc/puppetlabs/puppet/ssl
+root@leaf204#find / -name leaf204*
+
+about the facts
+puppet facts
+"system_uptime": {
+      "days": 5,
+      "hours": 139,
+      "seconds": 503155,
+      "uptime": "5 days"
+    },
+    
+
+root@leaf202#vi test.pp
+notify{"system up hours :${system_uptime[hours]}":}
+
+root@leaf202#puppet apply ./test.pp
+Notice: Compiled catalog for leaf202.cisco.com in environment production in 0.14 seconds
+Notice: system up hours :139
+Notice: /Stage[main]/Main/Notify[system up hours :139]/message: defined 'message' as 'system up hours :139'
+Notice: Applied catalog in 0.17 seconds
+
+#########################SVN tips######################################
+set apache location /home/svn #actually repos dir should be /home/svn/reposxxxx
+SVN only for one guy can access SVN server ,htpasswd -c /etc/subversion/passwd xxxxx
+
+SVN repo can be accessed via
+   file:///home/svn/repos         #local file access
+   http://svn_server/svn/repos    #port 80
+   svn://svn_server/home/svn/repos #port 63xxx
+
+SVN import file to newly repo
+#mkdir /home/svn/repos
+#svnadmin create file:///home/svn/repos
+#mkdir temp
+#svn import temp file:///home/svn/repos
+#rm -r temp
+
+SVN checkout command line should like this:
+#svn co http://puppetserver.alex.cisco.com/svn/repos —-username alex —password Alex2012
+#svn update —username alex
+#svn add filename.ext —username alex
+#svn commit -m "message content” —username alex —password Alex2012
+
+for hooks post-commit
+add the following items into post-commit file ,and chmod +x post-commit
+#!/bin/sh
+cd /etc/puppetlabs/code/environments/production/modules/repoalex && /usr/bin/svn update —username alex —password Alex2012 —no-auth-cache
+for hooks post-commit action in copy folder,hv to make copy folder be accessible
+#chmod -R 777 /copy_work_folder
+
+
+#############Apache 2 TIPS#####################
+
+#############PostgreSQL  TIPS #####################
+
+#############Puppet DB TIPS####################
+
+##########HOW TO START LAB SERVICES############
+start puppet agent
+#service puppet restart
+
+start puppet server
+#/etc/init.d/puppetserver stop/start
+
+start apache 2
+#service apache2 restart
+
+start svn serve 
+svnserve -d -r /path/to/repos
+
+start puppetdb
+
+sudo puppet resource service puppetdb ensure=running enable=true
+or # service puppetdb restart
+
+
+
