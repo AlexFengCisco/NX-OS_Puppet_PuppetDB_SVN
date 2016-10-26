@@ -2,7 +2,7 @@
 
 SVN subversion installation and setup
 
-    <https://help.ubuntu.com/lts/serverguide/subversion.html>
+    https://help.ubuntu.com/lts/serverguide/subversion.html
 
 most used SVN command with examples
 
