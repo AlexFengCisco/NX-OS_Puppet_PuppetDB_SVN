@@ -141,7 +141,7 @@ svnserve -d -r /path/to/repos
 start puppetdb
 
 sudo puppet resource service puppetdb ensure=running enable=true
-or # service puppetdb restart
+o# service puppetdb restart
 
 
 
