@@ -63,6 +63,8 @@ runinterval = 30
 #puppet agent - - configprint all
 
 ****solve guest shell yum install slow issue
+
+### modify /etc/yum.conf   add the following lines
 timeout=300 # default is 30
 
 minrate=100 # default is 1000
